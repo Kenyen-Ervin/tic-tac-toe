@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TicTacToe</title>
+<style>html{
+    background-color: black;
+    color: white;
+}
+
+.start{
+    text-align: center;
+}
+
+
+.box{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    justify-content:center;
+    grid-template-areas:
+    "s1 s2 s3"
+    "s4 s5 s6"
+    "s7 s8 s9";
+}
+
+h1{
+    text-align: center;
+    color: white;
+}
+
+.square1,.square2,.square3,.square4,.square5,.square6,.square7,.square8,.square9{
+    border: solid 3px white;
+    padding: 6vw;
+    background-color: black;
+    transition-duration:0.4s ;
+    color:white;
+    font-size: 2rem;
+}
+
+
+a{
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+}
+
+</style>
+</head>
+<script>function startGame()
+
+    {
+    document.turn = "X";
+    document.winner=null;
+    setMessage(document.turn + " gets to start.");
+    }
+    
+    function setMessage(msg)
+    {
+    document.getElementById("message").innerText = msg;
+    }
+    
+    function nextMove(square) {
+    if(square.innerText==""){
+    
+        square.innerText = document.turn;
+        switchTurn();
+        }
+        else{
+            setMessage("That Square is already taken");
+        }
+    }
+    
+        function switchTurn() {
+            if(checkForWinner(document.turn)){
+                setMessage("Congratulations " + document.turn +" You win!");
+            }
+            else if (document.turn == "X") {
+                    document.turn = "O";
+                    setMessage("It's " + document.turn + "'s turn!");
+                } else {
+                    document.turn = "X";
+                 setMessage("It's " + document.turn + "'s turn!");
+        }
+        }
+    
+    
+    
+    
+    
+     function checkRow(a, b, c, move)
+        {
+        var result = false;
+    
+        if (getBox(a) == move && getBox(b) == move &&
+        getBox(c) == move) {
+        result = true;
+        }
+        return result;
+        }
+    
+    
+    
+     function checkForWinner(move) {
+            var result = false;
+            if (checkRow(1, 2, 3, move) ||
+            checkRow(4, 5, 6, move) ||
+            checkRow(7, 8, 9, move) ||
+            checkRow(1, 4, 7, move) ||
+            checkRow(2, 5, 8, move) ||
+            checkRow(3, 6, 9, move) ||
+            checkRow(1, 5, 9, move) ||
+            checkRow(3, 5, 7, move))
+             {
+            result = true;
+            }
+    
+            return result;
+            }
+    
+    function getBox(number) {
+        return document.getElementById("s" + number).innerText;
+    }
+    </script>
+<body>
+    <body onload=startGame()>
+
+    <h1>Tic Tac Toe</h1>
+
+    <div id="message"></div>
+
+    <div class="box">
+        <div id="s1" class="square1" onclick="nextMove(this)"></div>
+        <div id="s2" class="square2" onclick="nextMove(this)"></div>
+        <div id="s3" class="square3" onclick="nextMove(this)"></div>
+        <div id="s4" class="square4" onclick="nextMove(this)"></div>
+        <div id="s5" class="square5" onclick="nextMove(this)"></div>
+        <div id="s6" class="square6" onclick="nextMove(this)"></div>
+        <div id="s7" class="square7" onclick="nextMove(this)"></div>
+        <div id="s8" class="square8" onclick="nextMove(this)"></div>
+        <div id="s9" class="square9" onclick="nextMove(this)"></div>
+    </div>
+
+    <div>
+        <a href="index.html">Reset</a>
+    </div> 
+</body>
+</html>
+
